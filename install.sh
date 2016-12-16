@@ -282,11 +282,11 @@ sudo chflags uchg /Private/var/vm/sleepimage;ok
 # Optional / Experimental                      #
 ################################################
 
-# running "Set computer name (as done via System Preferences → Sharing)"
-# sudo scutil --set ComputerName "antic"
-# sudo scutil --set HostName "antic"
-# sudo scutil --set LocalHostName "antic"
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "antic"
+running "Set computer name (as done via System Preferences → Sharing)"
+sudo scutil --set ComputerName "Fantastic Mr. Fox"
+sudo scutil --set HostName "fantastic-mr-fox"
+sudo scutil --set LocalHostName "FantasticMrFox"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "FantasticMrFox"
 
 # running "Disable smooth scrolling"
 # (Uncomment if you’re on an older Mac that messes up the animation)
@@ -305,11 +305,11 @@ sudo chflags uchg /Private/var/vm/sleepimage;ok
 # running "Stop iTunes from responding to the keyboard media keys"
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null;ok
 
-# running "Show icons for hard drives, servers, and removable media on the desktop"
-# defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-# defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
+running "Show icons for hard drives, servers, and removable media on the desktop"
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 # running "Enable the MacBook Air SuperDrive on any Mac"
 # sudo nvram boot-args="mbasd=1";ok
@@ -329,10 +329,10 @@ sudo chflags uchg /Private/var/vm/sleepimage;ok
 #running "Disable the Launchpad gesture (pinch with thumb and three fingers)"
 #defaults write com.apple.dock showLaunchpadGestureEnabled -int 0;ok
 
-#running "Add a spacer to the left side of the Dock (where the applications are)"
-#defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}';ok
-#running "Add a spacer to the right side of the Dock (where the Trash is)"
-#defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}';ok
+running "Add a spacer to the left side of the Dock (where the applications are)"
+defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}';ok
+running "Add a spacer to the right side of the Dock (where the Trash is)"
+defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}';ok
 
 
 ################################################
@@ -367,8 +367,8 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Clock.menu"
 ok
 
-running "Set highlight color to green"
-defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
+# running "Set highlight color to green"
+# defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
 
 running "Set sidebar icon size to medium"
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2;ok
@@ -450,8 +450,8 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
-running "Disable 'natural' (Lion-style) scrolling"
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false;ok
+running "Enable 'natural' (Lion-style) scrolling"
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
 
 running "Increase sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40;ok
@@ -486,7 +486,7 @@ bot "Configuring the Screen"
 
 running "Require password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0;ok
+defaults write com.apple.screensaver askForPasswordDelay -int 5;ok
 
 running "Save screenshots to the desktop"
 defaults write com.apple.screencapture location -string "${HOME}/Desktop";ok
@@ -675,8 +675,8 @@ defaults write com.apple.Safari HomePage -string "about:blank";ok
 running "Prevent Safari from opening ‘safe’ files automatically after downloading"
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false;ok
 
-running "Allow hitting the Backspace key to go to the previous page in history"
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true;ok
+running "Disallow hitting the Backspace key to go to the previous page in history"
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool false;ok
 
 running "Hide Safari’s bookmarks bar by default"
 defaults write com.apple.Safari ShowFavoritesBar -bool false;ok
@@ -727,8 +727,8 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -stri
 running "Disable inline attachments (just show the icons)"
 defaults write com.apple.mail DisableInlineAttachmentViewing -bool true;ok
 
-running "Disable automatic spell checking"
-defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled";ok
+running "Enable automatic spell checking"
+defaults write com.apple.mail SpellCheckingBehavior -string "SpellCheckingEnabled";ok
 
 ###############################################################################
 bot "Spotlight"
@@ -786,10 +786,8 @@ bot "Terminal & iTerm2"
 # i.e. hover over a window and start `typing in it without clicking first
 defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true;ok
-running "Installing the Solarized Light theme for iTerm (opening file)"
-open "./configs/Solarized Light.itermcolors";ok
-running "Installing the Solarized Dark theme for iTerm (opening file)"
-open "./configs/Solarized Dark.itermcolors";ok
+running "Installing the Honukai theme for iTerm (opening file)"
+open "./configs/honukay.itermcolors";ok
 
 running "Don’t display the annoying prompt when quitting iTerm"
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false;ok
@@ -808,7 +806,7 @@ defaults write com.googlecode.iterm2 HotkeyModifiers -int 262401;
 running "Make iTerm2 load new tabs in the same directory"
 /usr/libexec/PlistBuddy -c "set \"New Bookmarks\":0:\"Custom Directory\" Recycle" ~/Library/Preferences/com.googlecode.iterm2.plist
 running "setting fonts"
-defaults write com.googlecode.iterm2 "Normal Font" -string "Hack-Regular 12";
+defaults write com.googlecode.iterm2 "Normal Font" -string "Fira-Regular 12";
 defaults write com.googlecode.iterm2 "Non Ascii Font" -string "RobotoMonoForPowerline-Regular 12";
 ok
 running "reading iterm settings"
