@@ -1,18 +1,6 @@
-[![Beerpay](https://beerpay.io/atomantic/dotfiles/badge.svg?style=flat-square)](https://beerpay.io/atomantic/dotfiles)
+This is a fork of the dotfiles repository that is tweaked to my own needs.
 
-# 3.0.0 Upgrade Instructions!
-
-`3.0.0` brings huge changes. If you have made any modifications (and didn't make your own fork), you will want to backup your dotfiles prior to running `git-up` or `git pull` on `~/.dotfiles`.
-
-Do the following to upgrade your ~/.dotfiles safely:
-
-1. backup your dotfiles: `cp -R ~/.dotfiles ~/.dotfiles_old`
-2. `cd ~/.dotfiles`
-3. update dotfiles: `git-up` or `git pull`
-4. remove old submodule location: `rm -rf .vim` (now lives in `homedir/.vim`)
-5. inspect `install.sh` and `config.js` to make sure all the software you want is installed
-6. inspect `homedir/*` for any changes you want to port from `./dotfiles_old`
-7. run `install.sh` again
+See `install.sh` for details.
 
 # \\[._.]/ - Hi, I'm the OSX bot
 

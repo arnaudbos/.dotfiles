@@ -23,6 +23,19 @@ function bot() {
     echo -e "\n$COL_GREEN\[._.]/$COL_RESET - "$1
 }
 
+function filler() {
+  echo ""
+}
+
+function item() {
+  spaces=`printf '%*s\n' $((2*($1-1))) "" | tr ' ' ' '`
+  echo -en "$spaces$COL_MAGENTA \xE2\x9C\x93$COL_RESET" $2 "\n"
+}
+
+function msg() {
+  echo -en "$COL_CYAN ¡$COL_RESET "$1" "
+}
+
 function running() {
     echo -en "$COL_YELLOW ⇒ $COL_RESET"$1": "
 }
@@ -38,3 +51,8 @@ function warn() {
 function error() {
     echo -e "$COL_RED[error]$COL_RESET "$1
 }
+
+function botdone() {
+  echo -e "$COL_GREEN\[^_^]/$COL_RESET - $COL_GREEN\xe2\x98\x85$COL_RESET Done!"
+}
+

@@ -26,6 +26,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/syntastic'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'artur-shaik/vim-javacomplete2'
 "Plugin 'sheerun/vim-polyglot'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -203,6 +204,19 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 " type \es to format
 nnoremap <silent> <leader>es :Esformatter<CR>
 vnoremap <silent> <leader>es :EsformatterVisual<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Java Completion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+nmap <F5> <Plug>(JavaComplete-Imports-Add)
+imap <F5> <Plug>(JavaComplete-Imports-Add)
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree

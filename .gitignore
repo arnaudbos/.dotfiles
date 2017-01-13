@@ -13,3 +13,6 @@ homedir/.vim/.netrwhist
 homedir/.vim/bundle/*
 !homedir/.vim/bundle/.gitignore
 !homedir/.vim/bundle/Vundle.vim
+homedir/.atom/packages/
+homedir/.atom/.apm/
+homedir/.atom/.node-gyp/
