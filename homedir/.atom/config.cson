@@ -10,7 +10,7 @@
     telemetryConsent: "no"
     themes: [
       "atom-dark-ui"
-      "gruvbox"
+      "gruvbox-plus-syntax"
     ]
   editor:
     backUpBeforeSaving: true

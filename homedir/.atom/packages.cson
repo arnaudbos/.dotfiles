@@ -19,5 +19,5 @@ packages: [
   "tabs-to-spaces"
   "xml-formatter"
   "pretty-json"
-  "gruvbox"
+  "gruvbox-plus-syntax"
 ]
