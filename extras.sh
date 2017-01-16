@@ -21,7 +21,7 @@ ok
 ###############################################################################
 bot "Not Downloading Microsoft Office"
 ###############################################################################
-#download_app 'Microsoft Office' https://
+download_app 'Microsoft Office' https://www.dropbox.com/s/a74zuos8cen3bal/Microsoft%20Office%202016%2015.29.16120900.zip?dl=0
 botdone
 
 ###############################################################################

@@ -60,6 +60,8 @@ if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
   ok
 fi
 
+cp configs/honukai.zsh-theme oh-my-zsh/themes/honukai.zsh-theme
+
 if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
   git clone https://github.com/bhilburn/powerlevel9k.git oh-my-zsh/custom/themes/powerlevel9k
 fi
