@@ -9,8 +9,8 @@
     packagesWithKeymapsDisabled: []
     telemetryConsent: "no"
     themes: [
-      "one-dark-ui"
-      "gruvbox-plus-syntax"
+      "atom-dark-ui"
+      "gruvbox"
     ]
   editor:
     backUpBeforeSaving: true
