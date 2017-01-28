@@ -18,6 +18,11 @@ bot "installing packages from config.js..."
 node index.js
 ok
 
+bot "installing Vagrant plugins..."
+# TODO: Extrat in function with list of plugins as params if more than 1
+vagrant plugin install vagrant-docker-compose
+ok
+
 ###############################################################################
 bot "Not Downloading Microsoft Office"
 ###############################################################################
