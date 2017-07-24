@@ -7,6 +7,20 @@
 
 # source ./echos.sh
 
+function require_apt() {
+    running "apt-get $1 $2"
+    apt-cache search $1 > /dev/null 2>&1 | true
+    if [[ ${PIPESTATUS[0]} != 0 ]]; then
+        action "apt-get install $1 $2"
+        apt-get install -y $1 $2
+        if [[ $? != 0 ]]; then
+            error "failed to install $1! aborting..."
+            # exit -1
+        fi
+    fi
+    ok
+}
+
 function require_cask() {
     running "brew cask $1"
     brew cask list $1 > /dev/null 2>&1 | true
@@ -85,14 +99,10 @@ function sourceNVM(){
 
 function require_nvm() {
     mkdir -p ~/.nvm
-    cp $(brew --prefix nvm)/nvm-exec ~/.nvm/
-    sourceNVM
-    nvm install $1
-    if [[ $? != 0 ]]; then
-        action "installing nvm"
-        require_brew nvm
-        . ~/.bashrc
-        nvm install $1
+    if [[ $OSTYPE == darwin* ]]; then
+      cp $(brew --prefix nvm)/nvm-exec ~/.nvm/
+      sourceNVM
     fi
+    nvm install $1
     ok
 }

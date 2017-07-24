@@ -56,7 +56,6 @@ module.exports = {
     'flux',
     'cheatsheet',
     'cyberduck',
-    'docker',
     'dropbox',
     'google-chrome',
     'google-drive',
@@ -91,6 +90,18 @@ module.exports = {
     'virtualbox',
     'virtualbox-extension-pack',
     'xquartz'
+  ],
+  apt: [
+    'virtualbox',
+    'vagrant',
+    'swi-prolog',
+    'redshift-gtk',
+    'oracle-java8-set-default',
+    'oracle-java8-installer',
+    'graphviz',
+    'google-chrome-stable',
+    'atom',
+    'ack-grep'
   ],
   gem: [
   ],

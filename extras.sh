@@ -23,33 +23,35 @@ bot "installing Vagrant plugins..."
 vagrant plugin install vagrant-docker-compose
 ok
 
-###############################################################################
-bot "Not Downloading Microsoft Office"
-###############################################################################
-download_app 'Microsoft Office' https://www.dropbox.com/s/a74zuos8cen3bal/Microsoft%20Office%202016%2015.29.16120900.zip?dl=0
-botdone
-
-###############################################################################
-bot "Downloading OmniGraffle"
-###############################################################################
-download_app 'OmniGraffle' https://www.dropbox.com/s/4vsywp1g981hu9s/OmniGraffle%207.2.2.zip?dl=0
-botdone
-
-###############################################################################
-bot "Downloading OmniPlan"
-###############################################################################
-download_app 'OmniPlan' https://www.dropbox.com/s/6a5k1wng3l15l1z/OmniPlan%20Pro%203.5.1.zip?dl=0
-botdone
-
-###############################################################################
-bot "Downloading Fantastical"
-###############################################################################
-download_app 'Fantastical' https://www.dropbox.com/s/musjgt6y9v2liws/Fantastical%202.2.1.zip?dl=0
-botdone
-
-###############################################################################
-bot "Downloading Geogebra"
-###############################################################################
-download 'Geogebra' https://www.dropbox.com/s/kegkbggym9g5pap/geogebra_5-0-309-0_en_228222.zip?dl=0
-botdone
+if [[ $OSTYPE == darwin* ]]; then
+  ###############################################################################
+  bot "Not Downloading Microsoft Office"
+  ###############################################################################
+  download_app 'Microsoft Office' https://www.dropbox.com/s/a74zuos8cen3bal/Microsoft%20Office%202016%2015.29.16120900.zip?dl=0
+  botdone
+  
+  ###############################################################################
+  bot "Downloading OmniGraffle"
+  ###############################################################################
+  download_app 'OmniGraffle' https://www.dropbox.com/s/4vsywp1g981hu9s/OmniGraffle%207.2.2.zip?dl=0
+  botdone
+  
+  ###############################################################################
+  bot "Downloading OmniPlan"
+  ###############################################################################
+  download_app 'OmniPlan' https://www.dropbox.com/s/6a5k1wng3l15l1z/OmniPlan%20Pro%203.5.1.zip?dl=0
+  botdone
+  
+  ###############################################################################
+  bot "Downloading Fantastical"
+  ###############################################################################
+  download_app 'Fantastical' https://www.dropbox.com/s/musjgt6y9v2liws/Fantastical%202.2.1.zip?dl=0
+  botdone
+  
+  ###############################################################################
+  bot "Downloading Geogebra"
+  ###############################################################################
+  download 'Geogebra' https://www.dropbox.com/s/kegkbggym9g5pap/geogebra_5-0-309-0_en_228222.zip?dl=0
+  botdone
+fi
 

@@ -15,7 +15,6 @@ source ./lib_sh/requirers.sh
 bot "Hi! I'm going to install tooling and tweak your system settings. Here I go..."
 
 # ensure ~/.gitshots exists to prevent "Error." in terminal after git commits
-# TODO: use node/yoeman to templatize elements of this project and use inquerer to ask if the
 # user wants to use gitshots
 mkdir -p ~/.gitshots
 
@@ -116,8 +115,13 @@ if [[ $? = 0 ]]; then
   fi
 fi
 
-MD5_NEWWP=$(md5 img/wallpaper.png | awk '{print $4}')
-MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
+if [[ $OSTYPE == darwin* ]]; then
+  MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
+  MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
+else
+  MD5_NEWWP=$(md5sum ./img/wallpaper.jpg | awk '{print $4}')
+  MD5_OLDWP=$(md5sum $(gsettings get org.gnome.desktop.background picture-uri | sed 's/^.\{8\}\(.*\).\{1\}$/\1/'))
+fi
 if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
   question "Do you want to use the project's custom desktop wallpaper? [Y|n] " response
   if [[ $response =~ ^(no|n|N) ]];then
@@ -125,25 +129,93 @@ if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
     ok
   else
     running "Set a custom wallpaper image"
-    # `DefaultDesktop.jpg` is already a symlink, and
-    # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-    rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-    sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
-    sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg
-    sudo cp ./img/wallpaper.png /System/Library/CoreServices/DefaultDesktop.jpg;
-    sudo cp ./img/wallpaper.png /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+    if [[ $OSTYPE == darwin* ]]; then
+      # `DefaultDesktop.jpg` is already a symlink, and
+      # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
+      rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+      sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
+      sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg
+      sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
+      sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+    else
+      gsettings set org.gnome.desktop.background picture-uri file://$(pwd)/img/wallpaper.jpg;ok
+    fi
   fi
 fi
 
 ################################################
 # homebrew
 ################################################
-source ./brew.sh
+if [[ $OSTYPE == darwin* ]]; then
+  source ./brew.sh;
+  source ./casks.sh;
+else
+  source ./apt.sh;
+fi
+
+# node version manager
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
+) && . "$NVM_DIR/nvm.sh"
 
 ################################################
-# brew cask
+bot "Setting up >Git<"
 ################################################
-source ./casks.sh
+
+# skip those GUI clients, git command-line all the way
+if [[ $OSTYPE == darwin* ]]; then
+  require_brew git
+  require_brew fontconfig
+else
+  require_apt git
+  require_apt fontconfig
+fi
+# need fontconfig to install/build fonts
+
+################################################
+bot "Setting up >ZSH<"
+################################################
+running "installing zsh"; filler
+if [[ $OSTYPE == darwin* ]]; then
+  require_brew zsh
+  require_brew zsh-completions
+else
+  require_apt zsh
+fi
+
+# update ruby to latest
+if [[ $OSTYPE == darwin* ]]; then
+  require_brew ruby
+else
+  require_apt ruby-full
+fi
+
+# set zsh as the user login shell
+if [[ $OSTYPE == darwin* ]]; then
+  CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
+else
+  CURRENTSHELL=$SHELL
+fi
+if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]] && [[ "$CURRENTSHELL" != "/usr/bin/zsh" ]]; then
+  if [[ $OSTYPE == darwin* ]]; then
+    bot "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
+    # sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
+    # chsh -s /usr/local/bin/zsh
+    sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh > /dev/null 2>&1
+  else
+    bot "setting newer zsh (/usr/local/bin/zsh or /usr/bin/zsh) as your shell (password required)"
+    chsh -s $(which zsh)
+  fi
+  ok
+fi
+
+cp configs/honukai.zsh-theme oh-my-zsh/themes/honukai.zsh-theme
+
+if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
+  git clone https://github.com/bhilburn/powerlevel9k.git oh-my-zsh/custom/themes/powerlevel9k
+fi
 
 ################################################
 # dotfiles
@@ -158,7 +230,9 @@ source ./extras.sh
 ################################################
 # osx
 ################################################
-source ./osx.sh
+if [[ $OSTYPE == darwin* ]]; then
+  source ./osx.sh;
+fi
 
 ################################################
 # misc
@@ -167,10 +241,12 @@ bot "installing fonts"
 ./fonts/install.sh
 ok
 
-if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
-  running "Fixing Ruby Gems Directory Permissions"
-  sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
-  ok
+if [[ $OSTYPE == darwin* ]]; then
+  if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
+    running "Fixing Ruby Gems Directory Permissions"
+    sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
+    ok
+  fi
 fi
 
 running "Installing & updating Atom packages"; filler
@@ -179,57 +255,90 @@ atom_packages=$(mktemp /tmp/dotfiles.atom_packages.XXXXXXXXXX)
 cat homedir/.atom/packages.cson | sed '$ d' | sed '1,1d' | sed 's/\"//g' > $atom_packages
 apm install --packages-file $atom_packages
 
-################################################
-bot "Cleaning up the mess"
-################################################
-Remove outdated versions from the cellar
-running "Cleaning up homebrew cache"
-brew cleanup > /dev/null 2>&1
-brew cask cleanup > /dev/null 2>&1
-ok
+if [[ $OSTYPE == darwin* ]]; then
+  ################################################
+  bot "Cleaning up the mess"
+  ################################################
+  Remove outdated versions from the cellar
+  running "Cleaning up homebrew cache"
+  brew cleanup > /dev/null 2>&1
+  brew cask cleanup > /dev/null 2>&1
+  ok
+fi
 
 msg "Note that some of these changes require a logout/restart to take effect."; filler
 msg "You should also NOT open System Preferences. It might overwrite some of the settings."; filler
-running "Killing affected applications (so they can reboot)...."
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-    "Dock" "Finder" "Mail" "Messages" "SystemUIServer" "iCal" "Transmission" "Atom" \
-    "The Unarchiver" "smcFanControl"; do
-killall "${app}" > /dev/null 2>&1
-done
-ok
+if [[ $OSTYPE == darwin* ]]; then
+  running "Killing affected applications (so they can reboot)...."
+  for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+      "Dock" "Finder" "Mail" "Messages" "SystemUIServer" "iCal" "Transmission" "Atom" \
+      "The Unarchiver" "smcFanControl"; do
+  killall "${app}" > /dev/null 2>&1
+  done
+  ok
+fi
 
 botdone
 
-{
-  ###############################################################################
-  bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
-  ###############################################################################
-  item 1 "Installing from App Store:"
-  item 2 "Keynote"
-  item 2 "Numbers"
-  item 2 "Pages"
-  filler
-  item 1 "Set Finder settings"
-  item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
-  item 2 "Add folders to sidebar: 'Lab'"
-  filler
-  item 1 "Set Dropbox configuration:"
-  item 2 "Show desktop notifications"
-  item 2 "Start dropbox on system startup"
-  item 2 "Selective Sync folders"
-  item 2 "Do not enable camera uploads"
-  item 2 "Share screenshots using Dropbox"
-  filler
-  item 1 "Extra apps:"
-  item 2 "Add to firewall"
-} | tee ~/Desktop/osxbot_manual.txt
+if [[ $OSTYPE == darwin* ]]; then
+  {
+    ###############################################################################
+    bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
+    ###############################################################################
+    item 1 "Installing from App Store:"
+    item 2 "Keynote"
+    item 2 "Numbers"
+    item 2 "Pages"
+    filler
+    item 1 "Set Finder settings"
+    item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
+    item 2 "Add folders to sidebar: 'Lab'"
+    filler
+    item 1 "Set Dropbox configuration:"
+    item 2 "Show desktop notifications"
+    item 2 "Start dropbox on system startup"
+    item 2 "Selective Sync folders"
+    item 2 "Do not enable camera uploads"
+    item 2 "Share screenshots using Dropbox"
+    filler
+    item 1 "Extra apps:"
+    item 2 "Add to firewall"
+  } | tee ~/Desktop/osxbot_manual.txt;
+else
+  {
+    ###############################################################################
+    bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
+    ###############################################################################
+    item 1 "Installing from Package Manager:"
+    filler
+    item 1 "Set Nautilus settings"
+    item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
+    item 2 "Add folders to sidebar: 'Lab'"
+    filler
+    item 1 "Set Dropbox configuration:"
+    item 2 "Show desktop notifications"
+    item 2 "Start dropbox on system startup"
+    item 2 "Selective Sync folders"
+    item 2 "Do not enable camera uploads"
+    item 2 "Share screenshots using Dropbox"
+    filler
+    item 1 "Extra apps:"
+    item 2 "Add to firewall"
+  } | tee ~/Desktop/osxbot_manual.txt;
+fi
 # force mac version
-/usr/bin/sed -i '' -e "s/\[32;01m//g; s/\[39;49;00m//g; s/\[35;01m//g" ~/Desktop/osxbot_manual.txt
-filler
-msg "Manual instructions saved to '~/Desktop/osxbot_manual.txt'";filler
+if [[ $OSTYPE == darwin* ]]; then
+  /usr/bin/sed -i '' -e "s/\[32;01m//g; s/\[39;49;00m//g; s/\[35;01m//g" ~/Desktop/osxbot_manual.txt
+  filler
+  msg "Manual instructions saved to '~/Desktop/osxbot_manual.txt'";filler
+fi
 
 botdone
 
 ################################################
-bot "Woot! All done. Kill this terminal and launch iTerm"
+if [[ $OSTYPE == darwin* ]]; then
+  bot "Woot! All done. Kill this terminal and launch iTerm"
+else
+  bot "Woot! All done. Kill this terminal and launch Terminator"
+fi
 ################################################

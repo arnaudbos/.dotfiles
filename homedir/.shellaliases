@@ -13,7 +13,7 @@ alias to.downloads='cd ${MYDOWNLOADS}'
 alias to.dropbox='cd ~/Dropbox'
 alias to.docs='cd ${MYDOCUMENTS}'
 alias to.lab='cd ${MYLAB}'
-alias to.devapps='cd ${MYDEVAPPS}'
+#alias to.devapps='cd ${MYDEVAPPS}'
 
 
 #################################

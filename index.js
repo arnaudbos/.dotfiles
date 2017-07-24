@@ -1,20 +1,21 @@
 const emoji = require('node-emoji')
-// const inquirer = require('inquirer')
+const inquirer = require('inquirer')
 const config = require('./config')
 const command = require('./lib_node/command')
 
-// inquirer.prompt([{
-//   type: 'confirm',
-//   name: 'gitshots',
-//   message: 'Do you want to use gitshots?',
-//   default: true
-// }]).then(function (answers) {
-//   if(answers.gitshots){
-//     // ensure ~/.gitshots exists
-//     command('mkdir -p ~/.gitshots', __dirname, function(err, out) {
-//       if(err) console.error(err)
-//     });
-//   }
+//inquirer.prompt([{
+//  type: 'confirm',
+//  name: 'gitshots',
+//  message: 'Do you want to use gitshots?',
+//  default: true
+//}]).then(function (answers) {
+//  if(answers.gitshots){
+//    // ensure ~/.gitshots exists
+//    command('mkdir -p ~/.gitshots', __dirname, function(err, out) {
+//      if(err) console.error(err)
+//    });
+//  }
+//});
 
 const installPackages = function(type){
   console.info(emoji.get('coffee'), ' installing '+type+' packages')
@@ -26,9 +27,12 @@ const installPackages = function(type){
   });
 }
 
-installPackages('brew');
-installPackages('cask');
+if(process.platform==='darwin'){
+  installPackages('brew');
+  installPackages('cask');
+} else {
+  installPackages('apt');
+}
 installPackages('npm');
 installPackages('gem');
 
-// });

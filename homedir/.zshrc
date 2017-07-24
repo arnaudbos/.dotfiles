@@ -33,7 +33,8 @@ plugins=(git git-flow ssh-agent history jsontools last-working-dir lein sprunge 
 
 source $ZSH/oh-my-zsh.sh
 
-source /usr/local/opt/nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # load .nvmrc
 function chpwd() {
