@@ -1,11 +1,10 @@
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 module.exports = function _command(cmd, dir, cb) {
-  exec(cmd, {
-    cwd: dir || __dirname
-  }, function(err, stdout, stderr) {
-    if (err) {
-      console.error(err, stdout, stderr);
-    }
-    cb(err, stdout.split('\n').join(''));
+  var res = spawn('bash', ['-c', cmd]);
+  res.stdout.on('data', function(data) {
+    cb(undefined, 'stdout: ' + data);
+  });
+  res.stderr.on('data', function(data) {
+    cb('stderr: ' + data, res.stdout);
   });
 };

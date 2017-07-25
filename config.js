@@ -92,16 +92,18 @@ module.exports = {
     'xquartz'
   ],
   apt: [
-    'virtualbox',
-    'vagrant',
-    'swi-prolog',
-    'redshift-gtk',
-    'oracle-java8-set-default',
-    'oracle-java8-installer',
-    'graphviz',
-    'google-chrome-stable',
-    'atom',
     'ack-grep'
+    'atom',
+    'cowsay',
+    'fortune',
+    'google-chrome-stable',
+    'graphviz',
+    'oracle-java8-installer',
+    'oracle-java8-set-default',
+    'redshift-gtk',
+    'swi-prolog',
+    'vagrant',
+    'virtualbox',
   ],
   gem: [
   ],

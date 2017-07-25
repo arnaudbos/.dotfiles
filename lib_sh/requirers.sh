@@ -12,7 +12,7 @@ function require_apt() {
     apt-cache search $1 > /dev/null 2>&1 | true
     if [[ ${PIPESTATUS[0]} != 0 ]]; then
         action "apt-get install $1 $2"
-        apt-get install -y $1 $2
+        sudo apt-get install -y $1 $2
         if [[ $? != 0 ]]; then
             error "failed to install $1! aborting..."
             # exit -1
@@ -70,7 +70,9 @@ function require_gem() {
 }
 
 function require_npm() {
-    sourceNVM
+    if [[ $OSTYPE == darwin* ]]; then
+      sourceNVM
+    fi
     nvm use 4.4.4
     running "npm $*"
     npm list -g --depth 0 | grep $1@ > /dev/null
