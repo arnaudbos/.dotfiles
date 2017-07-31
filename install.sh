@@ -144,7 +144,7 @@ if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
 fi
 
 ################################################
-# homebrew
+# homebrew/apt
 ################################################
 if [[ $OSTYPE == darwin* ]]; then
   source ./brew.sh;
@@ -228,10 +228,24 @@ source ./dotfiles.sh
 source ./extras.sh
 
 ################################################
-# osx
+# vim
+################################################
+vim -c 'PluginInstall' -c 'qa!'
+
+################################################
+# spacemacs
+################################################
+if [[ ! -d "$HOME/.emacs.d" ]] ; then
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+fi
+
+################################################
+# osx/not osx
 ################################################
 if [[ $OSTYPE == darwin* ]]; then
   source ./osx.sh;
+else
+  source ./linux.sh;
 fi
 
 ################################################

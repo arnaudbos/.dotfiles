@@ -92,9 +92,10 @@ module.exports = {
     'xquartz'
   ],
   apt: [
-    'ack-grep'
+    'ack-grep',
     'atom',
     'cowsay',
+    'emacs',
     'fortune',
     'google-chrome-stable',
     'graphviz',
@@ -104,6 +105,8 @@ module.exports = {
     'swi-prolog',
     'vagrant',
     'virtualbox',
+    'terminator',
+    'tmux'
   ],
   gem: [
   ],

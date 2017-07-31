@@ -23,7 +23,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'godlygeek/tabular'
 " language tools
-Plugin 'scrooloose/syntastic'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'artur-shaik/vim-javacomplete2'
@@ -223,22 +222,6 @@ imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$']
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on " Activate syntax highlighting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_eslint_checker = 1
-let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_pug_checkers = ['jade']
 
 " OLD STUFF, keeping it while testing new config
 "
