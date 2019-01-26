@@ -20,24 +20,9 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'godlygeek/tabular'
 " language tools
-Plugin 'millermedeiros/vim-esformatter'
-Plugin 'digitaltoad/vim-pug'
-Plugin 'artur-shaik/vim-javacomplete2'
 "Plugin 'sheerun/vim-polyglot'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'node.js'
-Plugin 'SuperTab'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
@@ -199,35 +184,8 @@ noremap <leader>yy "*Y
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" esformatter
-" type \es to format
-nnoremap <silent> <leader>es :Esformatter<CR>
-vnoremap <silent> <leader>es :EsformatterVisual<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Java Completion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-nmap <F5> <Plug>(JavaComplete-Imports-Add)
-imap <F5> <Plug>(JavaComplete-Imports-Add)
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$']
-
-" OLD STUFF, keeping it while testing new config
-"
-"" Can't remember
-"command W w !sudo tee % > /dev/null
-"set splitbelow
-"set splitright
-"set acd
-""filetype plugin indent on
