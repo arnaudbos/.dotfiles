@@ -24,25 +24,16 @@ fi
 cp ./configs/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 ###############################################################################
-bot "Setting up >Google Chrome<"
+bot "Setting up >Mozilla Firefox<"
 ###############################################################################
-# checks if google chrome was already installed
-firstinstall=`brew cask list | grep "google-chrome" &> /dev/null ; echo $?`
+# checks if mozilla firefox was already installed
+firstinstall=`brew cask list | grep "firefox" &> /dev/null ; echo $?`
 
-require_cask google-chrome
-
-running "Allow installing user scripts via GitHub Gist or Userscripts.org"
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*";ok
-
-running "Use the system-native print preview dialog"
-defaults write com.google.Chrome DisablePrintPreview -bool true;ok
-
-running "Expand the print dialog by default"
-defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
+require_cask firefox
 
 # if first installation, opens
 if [ $firstinstall == 1 ]; then
-  open "/Applications/Google Chrome.app"
+  open "/Applications/Firefox.app"
 fi
 botdone
 
@@ -102,5 +93,10 @@ defaults write org.m0k.transmission WarningDonate -bool false;ok
 
 running "Hide the legal disclaimer"
 defaults write org.m0k.transmission WarningLegal -bool false;ok
+
+###############################################################################
+# bot "Setting up >odrive<"
+# bot "Setting up >Grammarly<"
+###############################################################################
 
 botdone
