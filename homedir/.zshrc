@@ -33,18 +33,6 @@ plugins=(git git-flow ssh-agent history jsontools last-working-dir lein sprunge 
 
 source $ZSH/oh-my-zsh.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-# load .nvmrc
-function chpwd() {
-  emulate -L zsh
-  if [[ -f .nvmrc ]] then
-    nvm use `cat .nvmrc`
-  fi
-}
-[[ -f .nvmrc ]] && nvm use `cat .nvmrc`
-
 # Customize to your needs...
 unsetopt correct
 
