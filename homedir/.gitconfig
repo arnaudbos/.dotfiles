@@ -58,7 +58,7 @@
   upm = !git fetch upstream && git merge upstream/master
 
   # least used
-  br = branch -a
+  br = branch
   s = status -s -u
   cl = log --stat -C -2
   c = commit
