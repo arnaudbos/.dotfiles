@@ -38,20 +38,6 @@ fi
 botdone
 
 ###############################################################################
-bot "Installing >Dropbox<"
-###############################################################################
-require_cask dropbox
-running "Remove Dropbox’s green checkmark icons in Finder"
-file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
-[ -e "${file}" ] && mv -f "${file}" "${file}.bak";ok
-# re-sign the file to avoid firewall popup
-sudo codesign --force --deep --sign - /Applications/Dropbox.app &> /dev/null
-
-# always opens Dropbox since if it exists its silent
-open "/Applications/Dropbox.app"
-botdone
-
-###############################################################################
 bot "Installing >Cheatsheet<"
 ###############################################################################
 # checks if was already installed
