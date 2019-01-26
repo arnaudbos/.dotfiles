@@ -43,12 +43,18 @@ Session.vim
 # Maven #
 #########
 target/
+classes/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
 
+########
+# Idea #
+########
+*.iml
+/.idea
 
 ########
 # Node #
