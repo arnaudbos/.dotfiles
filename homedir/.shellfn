@@ -85,11 +85,6 @@ function setproj()
     bot "Hi, this workspace is setup for the $1 project"
 }
 
-function schef()
-{
-    sudo chef-client
-}
-
 function fixperms(){
     find . \( -name "*.sh" -or -type d \) -exec chmod 755 {} \; && find . -type f ! -name "*.sh" -exec chmod 644 {} \;
 }
