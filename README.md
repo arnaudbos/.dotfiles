@@ -286,64 +286,13 @@ Here is the current list:
 
 # Software Installation
 
-homebrew, fontconfig, git, ruby, nvm (node + npm), and zsh (latest) are all installed inside the `install.sh` as foundational software for running this project.
+homebrew, fontconfig, git, node, npm, and zsh (latest) are all installed inside the `install.sh` as foundational software for running this project.
 Additional software is configured in `config.js` and can be customized in your own fork/branch.
 The following is the software that I have set as default:
 
 ## Utilities
 
-* coreutils
-* moreutils
-* findutils
-* ack
-* dos2unix
-* fortune
-* gawk
-* gifsicle
-* gnupg
-* gnu-sed
-* homebrew/dupes/grep
-* imagemagick
-* imagesnap
-* jq
-* nmap
-* openconnect
-* reattach-to-user-namespace
-* homebrew/dupes/screen
-* tmux
-* tree
-* ttyrec
-* vim --override-system-vi
-* watch
-* wget --enable-iri
-
-## Apps
-* box-sync
-* slack
-* gpgtools
-* iterm2
-* sizeup
-* xquartz
-* google-chrome
-
-## NPM Global Modules
-
-* antic
-* buzzphrase
-* bower
-* bower-check-updates
-* esformatter
-* eslint
-* generator-dockerize
-* gulp
-* instant-markdown-d
-* npm-check
-* trash
-* vtop
-* yo
-
-## Ruby Gems
-* git-up
+See [casks.sh](casks.sh), [config.js](config.js) and [extras.sh](extracts.sh).
 
 # Contributions
 Contributions are always welcome in the form of pull requests with explanatory comments.
