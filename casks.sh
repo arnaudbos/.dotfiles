@@ -38,6 +38,48 @@ fi
 botdone
 
 ###############################################################################
+bot "Setting up >odrive<"
+###############################################################################
+# checks if odrive was already installed
+firstinstall=`brew cask list | grep "odrive" &> /dev/null ; echo $?`
+
+require_cask odrive
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/odrive.app"
+fi
+botdone
+
+###############################################################################
+bot "Setting up >JetBrains Toolbox<"
+###############################################################################
+# checks if jetbrains-toolbox was already installed
+firstinstall=`brew cask list | grep "jetbrains-toolbox" &> /dev/null ; echo $?`
+
+require_cask jetbrains-toolbox
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/jetbrains-toolbox.app"
+fi
+botdone
+
+###############################################################################
+bot "Setting up >Docker<"
+###############################################################################
+# checks if docker was already installed
+firstinstall=`brew cask list | grep "docker" &> /dev/null ; echo $?`
+
+require_cask docker
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/Docker.app"
+fi
+botdone
+
+###############################################################################
 bot "Installing >Cheatsheet<"
 ###############################################################################
 # checks if was already installed
@@ -46,17 +88,6 @@ require_cask cheatsheet
 # if first installation, opens
 if [[ $firstinstall == 1 ]]; then
   open "/Applications/CheatSheet.app"
-fi
-
-###############################################################################
-bot "Installing >Flux<"
-###############################################################################
-# checks if was already installed
-firstinstall=`brew cask list | grep "flux" &> /dev/null ; echo $?`
-require_cask flux
-# if first installation, opens
-if [[ $firstinstall == 1 ]]; then
-  open "/Applications/Flux.app"
 fi
 
 ###############################################################################
