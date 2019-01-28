@@ -19,31 +19,45 @@ if [[ $OSTYPE == darwin* ]]; then
   ###############################################################################
   bot "Downloading OmniPlan"
   ###############################################################################
-  download_app 'OmniPlan' TODO
+  #download_app 'OmniPlan' TODO
   botdone
   
   ###############################################################################
   bot "Downloading OmniGraffle"
   ###############################################################################
-  download_app 'OmniGraffle' TODO
+  #download_app 'OmniGraffle' TODO
   botdone
   
   ###############################################################################
   bot "Downloading Final Cut Pro X"
   ###############################################################################
-  download_app 'Final Cut Pro X' TODO
+  #download_app 'Final Cut Pro X' TODO
   botdone
   
   ###############################################################################
   bot "Downloading Compressor"
   ###############################################################################
-  download_app 'Compressor' TODO
+  #download_app 'Compressor' TODO
   botdone
   
   ###############################################################################
   bot "Downloading Grammarly"
   ###############################################################################
-  download_app 'Grammarly' TODO
+  #download_app 'Grammarly' TODO
+  botdone
+  
+  ###############################################################################
+  bot "Downloading SizeUp License"
+  ###############################################################################
+  #download TODO
+  #open TODO
+  botdone
+  
+  ###############################################################################
+  bot "Downloading Cursive License"
+  ###############################################################################
+  #download TODO
+  #open TODO
   botdone
 fi
 
