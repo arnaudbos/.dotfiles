@@ -116,10 +116,10 @@ if [[ $? = 0 ]]; then
 fi
 
 if [[ $OSTYPE == darwin* ]]; then
-  MD5_NEWWP=$(md5 img/wallpaper.jpg | awk '{print $4}')
+  MD5_NEWWP=$(md5 img/laputa_huge.jpg | awk '{print $4}')
   MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
 else
-  MD5_NEWWP=$(md5sum ./img/wallpaper.jpg | awk '{print $4}')
+  MD5_NEWWP=$(md5sum ./img/laputa_huge.jpg | awk '{print $4}')
   MD5_OLDWP=$(md5sum $(gsettings get org.gnome.desktop.background picture-uri | sed 's/^.\{8\}\(.*\).\{1\}$/\1/'))
 fi
 if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
@@ -135,10 +135,10 @@ if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
       rm -rf ~/Library/Application Support/Dock/desktoppicture.db
       sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
       sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg
-      sudo cp ./img/wallpaper.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
-      sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+      sudo cp ./img/laputa_huge.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
+      sudo cp ./img/laputa_huge.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
     else
-      gsettings set org.gnome.desktop.background picture-uri file://$(pwd)/img/wallpaper.jpg;ok
+      gsettings set org.gnome.desktop.background picture-uri file://$(pwd)/img/laputa_huge.jpg;ok
     fi
   fi
 fi
@@ -152,13 +152,6 @@ if [[ $OSTYPE == darwin* ]]; then
 else
   source ./apt.sh;
 fi
-
-# node version manager
-export NVM_DIR="$HOME/.nvm" && (
-  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
-) && . "$NVM_DIR/nvm.sh"
 
 ################################################
 bot "Setting up >Git<"
@@ -183,13 +176,6 @@ if [[ $OSTYPE == darwin* ]]; then
   require_brew zsh-completions
 else
   require_apt zsh
-fi
-
-# update ruby to latest
-if [[ $OSTYPE == darwin* ]]; then
-  require_brew ruby
-else
-  require_apt ruby-full
 fi
 
 # set zsh as the user login shell
@@ -233,13 +219,6 @@ source ./extras.sh
 vim -c 'PluginInstall' -c 'qa!'
 
 ################################################
-# spacemacs
-################################################
-if [[ ! -d "$HOME/.emacs.d" ]] ; then
-  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-fi
-
-################################################
 # osx/not osx
 ################################################
 if [[ $OSTYPE == darwin* ]]; then
@@ -254,20 +233,6 @@ fi
 bot "installing fonts"
 ./fonts/install.sh
 ok
-
-if [[ $OSTYPE == darwin* ]]; then
-  if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
-    running "Fixing Ruby Gems Directory Permissions"
-    sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
-    ok
-  fi
-fi
-
-running "Installing & updating Atom packages"; filler
-# strip packages file
-atom_packages=$(mktemp /tmp/dotfiles.atom_packages.XXXXXXXXXX)
-cat homedir/.atom/packages.cson | sed '$ d' | sed '1,1d' | sed 's/\"//g' > $atom_packages
-apm install --packages-file $atom_packages
 
 if [[ $OSTYPE == darwin* ]]; then
   ################################################
@@ -303,17 +268,17 @@ if [[ $OSTYPE == darwin* ]]; then
     item 2 "Keynote"
     item 2 "Numbers"
     item 2 "Pages"
+    item 1 "Installing from JetBrains Toolbox:"
+    item 2 "IntelliJ IDEA with plugins"
+    item 1 "Installing Google Cloud tools."
     filler
     item 1 "Set Finder settings"
     item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
     item 2 "Add folders to sidebar: 'Lab'"
     filler
-    item 1 "Set Dropbox configuration:"
-    item 2 "Show desktop notifications"
-    item 2 "Start dropbox on system startup"
-    item 2 "Selective Sync folders"
-    item 2 "Do not enable camera uploads"
-    item 2 "Share screenshots using Dropbox"
+    item 1 "Set odrive configuration."
+    item 1 "Set Final Cut Pro X / Compressor configuration."
+    item 1 "Set Cursive and SizeUp licenses."
     filler
     item 1 "Extra apps:"
     item 2 "Add to firewall"
@@ -328,13 +293,6 @@ else
     item 1 "Set Nautilus settings"
     item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
     item 2 "Add folders to sidebar: 'Lab'"
-    filler
-    item 1 "Set Dropbox configuration:"
-    item 2 "Show desktop notifications"
-    item 2 "Start dropbox on system startup"
-    item 2 "Selective Sync folders"
-    item 2 "Do not enable camera uploads"
-    item 2 "Share screenshots using Dropbox"
     filler
     item 1 "Extra apps:"
     item 2 "Add to firewall"
