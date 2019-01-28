@@ -37,8 +37,6 @@ inquirer.prompt([{
   } else {
     installPackages('apt');
   }
-  installPackages('npm');
-  installPackages('gem');
 });
 
 
