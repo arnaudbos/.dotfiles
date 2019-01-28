@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# nvm
-require_nvm 4.4.4
-
 #####################################
 # Now we can switch to node.js mode
 # for better maintainability and
@@ -18,40 +15,29 @@ bot "installing packages from config.js..."
 node index.js
 ok
 
-bot "installing Vagrant plugins..."
-# TODO: Extrat in function with list of plugins as params if more than 1
-vagrant plugin install vagrant-docker-compose
-ok
-
 if [[ $OSTYPE == darwin* ]]; then
   ###############################################################################
-  bot "Not Downloading Microsoft Office"
+  bot "Downloading OmniPlan"
   ###############################################################################
-  download_app 'Microsoft Office' https://www.dropbox.com/s/a74zuos8cen3bal/Microsoft%20Office%202016%2015.29.16120900.zip?dl=0
+  download_app 'OmniPlan' TODO
   botdone
   
   ###############################################################################
   bot "Downloading OmniGraffle"
   ###############################################################################
-  download_app 'OmniGraffle' https://www.dropbox.com/s/4vsywp1g981hu9s/OmniGraffle%207.2.2.zip?dl=0
+  download_app 'OmniGraffle' TODO
   botdone
   
   ###############################################################################
-  bot "Downloading OmniPlan"
+  bot "Downloading Final Cut Pro X"
   ###############################################################################
-  download_app 'OmniPlan' https://www.dropbox.com/s/6a5k1wng3l15l1z/OmniPlan%20Pro%203.5.1.zip?dl=0
+  download_app 'Final Cut Pro X' TODO
   botdone
   
   ###############################################################################
-  bot "Downloading Fantastical"
+  bot "Downloading Compressor"
   ###############################################################################
-  download_app 'Fantastical' https://www.dropbox.com/s/musjgt6y9v2liws/Fantastical%202.2.1.zip?dl=0
-  botdone
-  
-  ###############################################################################
-  bot "Downloading Geogebra"
-  ###############################################################################
-  download 'Geogebra' https://www.dropbox.com/s/kegkbggym9g5pap/geogebra_5-0-309-0_en_228222.zip?dl=0
+  download_app 'Compressor' TODO
   botdone
 fi
 
