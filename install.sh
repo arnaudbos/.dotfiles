@@ -265,23 +265,23 @@ if [[ $OSTYPE == darwin* ]]; then
     bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
     ###############################################################################
     item 1 "Installing from App Store:"
-    item 2 "Keynote"
-    item 2 "Numbers"
-    item 2 "Pages"
+    item 2 "...?"
     item 1 "Installing from JetBrains Toolbox:"
     item 2 "IntelliJ IDEA with plugins"
     item 1 "Installing Google Cloud tools."
     filler
     item 1 "Set Finder settings"
-    item 2 "Remove 'All My Files', 'Movies', 'Music' and 'Pictures' from sidebar"
+    item 2 "Remove 'All My Files' from sidebar",
+    item 2 "Add 'odrive' to sidebar"
     item 2 "Add folders to sidebar: 'Lab'"
     filler
     item 1 "Set odrive configuration."
-    item 1 "Set Final Cut Pro X / Compressor configuration."
+    item 1 "Sync Firefox."
+    item 1 "Set Final Cut Pro X / Compressor / Grammarly configuration."
     item 1 "Set Cursive and SizeUp licenses."
     filler
     item 1 "Extra apps:"
-    item 2 "Add to firewall"
+    item 2 "...?"
   } | tee ~/Desktop/osxbot_manual.txt;
 else
   {
@@ -295,7 +295,7 @@ else
     item 2 "Add folders to sidebar: 'Lab'"
     filler
     item 1 "Extra apps:"
-    item 2 "Add to firewall"
+    item 2 "...?"
   } | tee ~/Desktop/osxbot_manual.txt;
 fi
 # force mac version
