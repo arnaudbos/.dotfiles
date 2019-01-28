@@ -58,7 +58,7 @@
   upm = !git fetch upstream && git merge upstream/master
 
   # least used
-  br = branch -a
+  br = branch
   s = status -s -u
   cl = log --stat -C -2
   c = commit
@@ -71,27 +71,27 @@
   who = shortlog -s --
   ph = push
   pl = pull
-  lp = log -p
-  lod = log --oneline --decorate
-  lg = log --graph
-  lpo = log --pretty=oneline --abbrev-commit --graph --decorate --all
-  l1 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-  l2 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lp = log -p --color | emojify | less -r
+  lod = log --oneline --decorate --color | emojify | less -r
+  lg = log --graph --color | emojify | less -r
+  lpo = log --pretty=oneline --abbrev-commit --graph --decorate --all --color | emojify | less -r
+  l1 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --color | emojify | less -r
+  l2 = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color | emojify | less -r
   spull = !git-svn fetch && git-svn rebase
   spush = !git-svn dcommit
   sync = !git pull && git push
   es = !git pull --rebase && git push
-  lf = log --pretty=fuller
+  lf = log --pretty=fuller --color | emojify | less -r
   ignorechanges = update-index --assume-unchanged
   noticechanges = update-index --no-assume-unchanged
   gc-ap = gc --aggressive --prune
   listconf = config --global --list
-  lsm = log -M --stat
-  hse = log --stat -5
+  lsm = log -M --stat --color | emojify | less -r
+  hse = log --stat -5 --color | emojify | less -r
   diffall = diff HEAD
-  logr = log -M
-  logr2 = log --stat -M -2
-  logit = log --stat -M
+  logr = log -M --color | emojify | less -r
+  logr2 = log --stat -M -2 --color | emojify | less -r
+  logit = log --stat -M --color | emojify | less -r
   scrub = !git reset --hard && git clean -fd
   pub = !git pub checkout master && git pull && git checkout dev && git rebase master && git checkout master && git merge dev && git wtf
   cs = status
@@ -100,23 +100,23 @@
   pur = pull --rebase
   whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
   orphank = !gitk --all `git reflog | cut -c1-7`&
-  orphanl = !git log --pretty=oneline --abbrev-commit --graph --decorate `git reflog | cut -c1-7`
+  orphanl = !git log --pretty=oneline --abbrev-commit --graph --decorate `git reflog | cut -c1-7` --color | emojify | less -r
   k = !exec gitk --all&
   testecho1 = !sh -c 'echo with slash: zero=$0 one=$1 two=$2' -
   # te1 RESULT: with slash: zero=- one=A two=B
   testecho2 = !sh -c 'echo without slash: zero=$0 one=$1 two=$2'
   # te2 RESULT: without slash: zero=A one=B two=C
   st = status
-  l = log --stat -C
-  ll = log --stat -C -3
+  l = log --stat -C --color | emojify | less -r
+  ll = log --stat -C -3 --color | emojify | less -r
   servehere = daemon --verbose --informative-errors --reuseaddr --export-all --base-path=. --enable=receive-pack
   purgeme = !git clean -fd && git reset --hard
   prunenow = gc --prune=now
   ri = rebase --interactive --autosquash
-  lol = log --pretty=oneline --graph --abbrev-commit --all
-  blg = log --graph --decorate --all --abbrev-commit --pretty=oneline
-  slog = log --graph --simplify-by-decoration --all --abbrev-commit --pretty=oneline
-  lgso = log --graph --date=short --pretty=format:'%C(yellow)%h%Creset %cn%x09%cd %s%C(green bold)%d'
+  lol = log --pretty=oneline --graph --abbrev-commit --all --color | emojify | less -r
+  blg = log --graph --decorate --all --abbrev-commit --pretty=oneline --color | emojify | less -r
+  slog = log --graph --simplify-by-decoration --all --abbrev-commit --pretty=oneline --color | emojify | less -r
+  lgso = log --graph --date=short --pretty=format:'%C(yellow)%h%Creset %cn%x09%cd %s%C(green bold)%d' --color | emojify | less -r
   ro = !git fetch origin && git reset --hard origin/master
   shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
   pushnotes = !sh -c 'git push $1 refs/notes/*' -

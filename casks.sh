@@ -24,40 +24,59 @@ fi
 cp ./configs/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
 ###############################################################################
-bot "Setting up >Google Chrome<"
+bot "Setting up >Mozilla Firefox<"
 ###############################################################################
-# checks if google chrome was already installed
-firstinstall=`brew cask list | grep "google-chrome" &> /dev/null ; echo $?`
+# checks if mozilla firefox was already installed
+firstinstall=`brew cask list | grep "firefox" &> /dev/null ; echo $?`
 
-require_cask google-chrome
-
-running "Allow installing user scripts via GitHub Gist or Userscripts.org"
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*";ok
-
-running "Use the system-native print preview dialog"
-defaults write com.google.Chrome DisablePrintPreview -bool true;ok
-
-running "Expand the print dialog by default"
-defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true;ok
+require_cask firefox
 
 # if first installation, opens
 if [ $firstinstall == 1 ]; then
-  open "/Applications/Google Chrome.app"
+  open "/Applications/Firefox.app"
 fi
 botdone
 
 ###############################################################################
-bot "Installing >Dropbox<"
+bot "Setting up >odrive<"
 ###############################################################################
-require_cask dropbox
-running "Remove Dropbox’s green checkmark icons in Finder"
-file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
-[ -e "${file}" ] && mv -f "${file}" "${file}.bak";ok
-# re-sign the file to avoid firewall popup
-sudo codesign --force --deep --sign - /Applications/Dropbox.app &> /dev/null
+# checks if odrive was already installed
+firstinstall=`brew cask list | grep "odrive" &> /dev/null ; echo $?`
 
-# always opens Dropbox since if it exists its silent
-open "/Applications/Dropbox.app"
+require_cask odrive
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/odrive.app"
+fi
+botdone
+
+###############################################################################
+bot "Setting up >JetBrains Toolbox<"
+###############################################################################
+# checks if jetbrains-toolbox was already installed
+firstinstall=`brew cask list | grep "jetbrains-toolbox" &> /dev/null ; echo $?`
+
+require_cask jetbrains-toolbox
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/jetbrains-toolbox.app"
+fi
+botdone
+
+###############################################################################
+bot "Setting up >Docker<"
+###############################################################################
+# checks if docker was already installed
+firstinstall=`brew cask list | grep "docker" &> /dev/null ; echo $?`
+
+require_cask docker
+
+# if first installation, opens
+if [ $firstinstall == 1 ]; then
+  open "/Applications/Docker.app"
+fi
 botdone
 
 ###############################################################################
@@ -69,17 +88,6 @@ require_cask cheatsheet
 # if first installation, opens
 if [[ $firstinstall == 1 ]]; then
   open "/Applications/CheatSheet.app"
-fi
-
-###############################################################################
-bot "Installing >Flux<"
-###############################################################################
-# checks if was already installed
-firstinstall=`brew cask list | grep "flux" &> /dev/null ; echo $?`
-require_cask flux
-# if first installation, opens
-if [[ $firstinstall == 1 ]]; then
-  open "/Applications/Flux.app"
 fi
 
 ###############################################################################
@@ -102,5 +110,10 @@ defaults write org.m0k.transmission WarningDonate -bool false;ok
 
 running "Hide the legal disclaimer"
 defaults write org.m0k.transmission WarningLegal -bool false;ok
+
+###############################################################################
+# bot "Setting up >odrive<"
+# bot "Setting up >Grammarly<"
+###############################################################################
 
 botdone

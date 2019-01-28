@@ -79,7 +79,7 @@ To launch fullscreen, hit `Command + Enter` in iTerm, then use `Command + d` and
 Note: I recommend forking this repo in case you don't like anything I do and want to set your own preferences (and pull request them!)
 
 ```bash
-git clone --recurse-submodules https://github.com/atomantic/dotfiles ~/.dotfiles
+git clone --recurse-submodules https://github.com/arnaudbos/.dotfiles ~/.dotfiles
 cd ~/.dotfiles;
 # run this using terminal (not iTerm, lest iterm settings get discarded on exit)
 ./install.sh
@@ -95,8 +95,8 @@ If you have existing dotfiles for configuring git, zsh, vim, etc, these will be 
 
 # Additional
 
-## VIM as IDE
-I am moving away from using Atom and instead using vim as my IDE. I use Vundle to manage vim plugins (instead of pathogen). Vundle is better in many ways and is compatible with pathogen plugins. Additionally, vundle will manage and install it's own plugins so we don't have to use git submodules for all of them.
+## Spacemacs as IDE
+I am moving away from using Vim and instead using emacs/Spacemacs as my IDE. I still use Vundle to manage vim plugins (instead of pathogen). Vundle is better in many ways and is compatible with pathogen plugins. Additionally, vundle will manage and install it's own plugins so we don't have to use git submodules for all of them.
 To install plugins with vundle, pop open vim and run `:PluginInstall`
 
 ## Crontab
@@ -122,7 +122,6 @@ Here is the current list:
 - Set a custom wallpaper image
 
 ## Standard System Changes
-- always boot in verbose mode (not OSX GUI mode)
 - allow 'locate' command
 - Set standby delay to 24 hours (default is 1 hour)
 - Disable the sound effects on boot
@@ -287,64 +286,13 @@ Here is the current list:
 
 # Software Installation
 
-homebrew, fontconfig, git, ruby, nvm (node + npm), and zsh (latest) are all installed inside the `install.sh` as foundational software for running this project.
+homebrew, fontconfig, git, node, npm, and zsh (latest) are all installed inside the `install.sh` as foundational software for running this project.
 Additional software is configured in `config.js` and can be customized in your own fork/branch.
 The following is the software that I have set as default:
 
 ## Utilities
 
-* coreutils
-* moreutils
-* findutils
-* ack
-* dos2unix
-* fortune
-* gawk
-* gifsicle
-* gnupg
-* gnu-sed
-* homebrew/dupes/grep
-* imagemagick
-* imagesnap
-* jq
-* nmap
-* openconnect
-* reattach-to-user-namespace
-* homebrew/dupes/screen
-* tmux
-* tree
-* ttyrec
-* vim --override-system-vi
-* watch
-* wget --enable-iri
-
-## Apps
-* box-sync
-* slack
-* gpgtools
-* iterm2
-* sizeup
-* xquartz
-* google-chrome
-
-## NPM Global Modules
-
-* antic
-* buzzphrase
-* bower
-* bower-check-updates
-* esformatter
-* eslint
-* generator-dockerize
-* gulp
-* instant-markdown-d
-* npm-check
-* trash
-* vtop
-* yo
-
-## Ruby Gems
-* git-up
+See [casks.sh](casks.sh), [config.js](config.js) and [extras.sh](extracts.sh).
 
 # Contributions
 Contributions are always welcome in the form of pull requests with explanatory comments.

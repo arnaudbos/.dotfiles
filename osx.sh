@@ -84,8 +84,9 @@ defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-
 ################################################
 bot "Standard System Changes"
 ################################################
-running "always boot in verbose mode (not OSX GUI mode)"
-sudo nvram boot-args="-v";ok
+running "always boot in OSX GUI mode (not verbose mode)"
+#sudo nvram boot-args="-v";ok
+sudo nvram boot-args="";ok
 
 running "allow 'locate' command"
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist > /dev/null 2>&1;ok

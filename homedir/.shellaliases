@@ -10,10 +10,8 @@
 #########################################
 # Commands to change dirs
 alias to.downloads='cd ${MYDOWNLOADS}'
-alias to.dropbox='cd ~/Dropbox'
 alias to.docs='cd ${MYDOCUMENTS}'
 alias to.lab='cd ${MYLAB}'
-#alias to.devapps='cd ${MYDEVAPPS}'
 
 
 #################################
@@ -61,23 +59,8 @@ alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v
 # -l Long format
 # -h Short size suffixes (B, K, M, G, P)
 # -p Postpend slash to folders
-alias ls='ls -G -h -p '
+alias ls='ls -G -h -p | lolcat'
 alias ll='ls -alF -G -h -p '
-
-# Restart Apache on Mac
-alias apacherestart="sudo /usr/sbin/apachectl restart"
-
-#Personal Commands
-alias game.seek='txt="";for i in {1..20};do txt=$txt"$i. ";done;txt=$txt" Ready or not, here I come";say $txt'
-
-#Git Tools
-# assumes git-up is installed (gem install git-up)
-# switches to 'develop' branch, updates all local branches (nicely using git-up), removes all local branches already merged into 'develop'
-alias gitdev='git checkout develop; git-up; git branch --merged develop | grep -v "\* develop" | xargs -n 1 git branch -d; git branch;'
-
-# node.js + io.js
-alias usenode='brew unlink iojs && brew link node && echo Using Node.js'
-alias useio='brew unlink node && brew link --force iojs && echo Using io.js'
 
 # firewall management
 alias port-forward-enable="echo 'rdr pass inet proto tcp from any to any port 2376 -> 127.0.0.1 port 2376' | sudo pfctl -ef -"

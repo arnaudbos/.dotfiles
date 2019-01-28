@@ -29,24 +29,12 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow ssh-agent history jsontools last-working-dir lein sprunge web-search colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle bower docker go gradle lein redis-cli vagrant node npm pip virtualenv fabric brew nyan autojump)
+plugins=(git ssh-agent history jsontools lein colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle docker lein node npm pip virtualenv brew)
 
 source $ZSH/oh-my-zsh.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
-# load .nvmrc
-function chpwd() {
-  emulate -L zsh
-  if [[ -f .nvmrc ]] then
-    nvm use `cat .nvmrc`
-  fi
-}
-[[ -f .nvmrc ]] && nvm use `cat .nvmrc`
 
 # Customize to your needs...
 unsetopt correct
 
 # run fortune on new terminal :)
-chuck_cow
+chuck_cow | lolcat
