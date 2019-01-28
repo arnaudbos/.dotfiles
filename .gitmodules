@@ -7,6 +7,3 @@
 [submodule "homedir/.vim/bundle/Vundle.vim"]
 	path = homedir/.vim/bundle/Vundle.vim
 	url = git://github.com/VundleVim/Vundle.vim.git
-[submodule "homedir/.emacs.d"]
-	path = homedir/.emacs.d
-	url = git://github.com/syl20bnr/spacemacs.git
