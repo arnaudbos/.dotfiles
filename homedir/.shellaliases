@@ -10,7 +10,6 @@
 #########################################
 # Commands to change dirs
 alias to.downloads='cd ${MYDOWNLOADS}'
-alias to.dropbox='cd ~/Dropbox'
 alias to.docs='cd ${MYDOCUMENTS}'
 alias to.lab='cd ${MYLAB}'
 
@@ -60,7 +59,7 @@ alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v
 # -l Long format
 # -h Short size suffixes (B, K, M, G, P)
 # -p Postpend slash to folders
-alias ls='ls -G -h -p '
+alias ls='ls -G -h -p | lolcat'
 alias ll='ls -alF -G -h -p '
 
 # firewall management
