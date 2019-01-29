@@ -59,8 +59,8 @@ alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v
 # -l Long format
 # -h Short size suffixes (B, K, M, G, P)
 # -p Postpend slash to folders
-alias ls='ls -G -h -p | lolcat'
-alias ll='ls -alF -G -h -p '
+alias ls="ls -G -h -p "
+alias ll="ls -alF -G -h -p "
 
 # firewall management
 alias port-forward-enable="echo 'rdr pass inet proto tcp from any to any port 2376 -> 127.0.0.1 port 2376' | sudo pfctl -ef -"

@@ -111,9 +111,40 @@ defaults write org.m0k.transmission WarningDonate -bool false;ok
 running "Hide the legal disclaimer"
 defaults write org.m0k.transmission WarningLegal -bool false;ok
 
-###############################################################################
-# bot "Setting up >odrive<"
-# bot "Setting up >Grammarly<"
-###############################################################################
+botdone
+
+################################################
+bot "Setting up brews"
+################################################
+
+bot "Installing >emacs<"
+require_cask emacs
+
+bot "Installing >evernote<"
+require_cask evernote
+
+bot "Installing >geogebra<"
+require_cask geogebra
+
+bot "Installing >java<"
+require_cask java
+
+bot "Installing >skitch<"
+require_cask skitch
+
+bot "Installing >skype<"
+require_cask skype
+
+bot "Installing >the-unarchiver<"
+require_cask the-unarchiver
+
+bot "Installing >transmission<"
+require_cask transmission
+
+bot "Installing >vlc<"
+require_cask vlc
+
+bot "Installing >xquartz<"
+require_cask xquartz
 
 botdone

@@ -38,3 +38,5 @@ unsetopt correct
 
 # run fortune on new terminal :)
 chuck_cow | lolcat
+
+eval $(thefuck --alias)

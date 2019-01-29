@@ -1,63 +1,59 @@
 #!/usr/bin/env bash
 
-#####################################
-# Now we can switch to node.js mode
-# for better maintainability and
-# easier configuration via
-# JSON files and inquirer prompts
-#####################################
-
-bot "installing npm tools needed to run this project..."
-npm install
-ok
-
-bot "installing packages from config.js..."
-node index.js
-ok
-
 if [[ $OSTYPE == darwin* ]]; then
   ###############################################################################
   bot "Downloading OmniPlan"
   ###############################################################################
-  #download_app 'OmniPlan' TODO
+  download_app 'OmniPlan' 1HJI4OkHQWnC5-tEEc31OlFNltncN9eSC
   botdone
-  
+
   ###############################################################################
   bot "Downloading OmniGraffle"
   ###############################################################################
-  #download_app 'OmniGraffle' TODO
+  download_app 'OmniGraffle' 1eKntPOP-Yl1ExV65f308s1HahWPV7EfW
   botdone
-  
+
   ###############################################################################
   bot "Downloading Final Cut Pro X"
   ###############################################################################
-  #download_app 'Final Cut Pro X' TODO
+  download_app 'Final Cut Pro X' 1RNUfXL6342IQ8QGguXcQR3yaSCZq790d
   botdone
-  
+
   ###############################################################################
   bot "Downloading Compressor"
   ###############################################################################
-  #download_app 'Compressor' TODO
+  download_app 'Compressor' 1jgQ62F8M9zs0immW4RHQs4eROOwcG1jp
   botdone
-  
+
   ###############################################################################
   bot "Downloading Grammarly"
   ###############################################################################
-  #download_app 'Grammarly' TODO
+  download_app 'Grammarly' https://download-editor.grammarly.com/osx/Grammarly.dmg
   botdone
-  
+
   ###############################################################################
-  bot "Downloading SizeUp License"
+  bot "Downloading SizeUp with License"
   ###############################################################################
-  #download TODO
-  #open TODO
+  download_app 'SizeUp' 1ClbmLG_3k6UDpjPquG8Tl9GzkgJ2UGnf
   botdone
-  
+
   ###############################################################################
   bot "Downloading Cursive License"
   ###############################################################################
-  #download TODO
-  #open TODO
+  running "Downloading Cursive Licence to ~/Downloads"; filler
+  pushd ~/Downloads > /dev/null 2>&1
+  download 'Cursive License' 1HKXWQImbTUob0TiH1x3oEzqp-BA7Giya
+  popd > /dev/null 2>&1
+  botdone
+
+  ###############################################################################
+  bot "Downloading useless TouchBarNyanCat"
+  download_app 'TouchBarNyanCat' 1SL54cb1lCQHM1FsDTVRYMVH-UXgBIwFB
+  botdone
+
+  ###############################################################################
+  bot "Downloading Zotero"
+  download_app 'Zotero' 1SRs0PaB7FDh8z4gvFdrqE1xkodcfZZyB
   botdone
 fi
 

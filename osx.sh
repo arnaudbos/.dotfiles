@@ -197,6 +197,36 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true;ok
 
+running "Trackpad: map finger gestures"
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad DragLock -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool false;ok
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad SecondClickThreshold -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -int 2;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerPinchGesture -int 2;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHandResting -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizScroll -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRotate -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadScroll -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -int 1;ok
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 3;ok
+defaults write com.apple.AppleMultitouchTrackpad USBMouseStopsTrackpad -int 0;ok
+defaults write com.apple.AppleMultitouchTrackpad UserPreferences -bool false;ok
+defaults write com.apple.AppleMultitouchTrackpad version -int 12;ok
+
 running "Enable 'natural' (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true;ok
 

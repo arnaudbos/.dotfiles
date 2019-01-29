@@ -204,6 +204,13 @@ if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
 fi
 
 ################################################
+# spacemacs
+################################################
+if [[ ! -d "$HOME/.emacs.d" ]] ; then
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+fi
+
+################################################
 # dotfiles
 ################################################
 source ./dotfiles.sh
@@ -238,7 +245,7 @@ if [[ $OSTYPE == darwin* ]]; then
   ################################################
   bot "Cleaning up the mess"
   ################################################
-  Remove outdated versions from the cellar
+  # Remove outdated versions from the cellar
   running "Cleaning up homebrew cache"
   brew cleanup > /dev/null 2>&1
   brew cask cleanup > /dev/null 2>&1

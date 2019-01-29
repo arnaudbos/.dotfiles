@@ -10,8 +10,12 @@ function question() {
 
 function download() {
     running "downloading $1";filler
-    # retry download until complete
-    curl -#LO "$1" --retry 999 --retry-max-time 0 -C -
+    http="${2:0:4}"
+    if [[ $http = "http" ]]; then
+        curl -#LO "$2" --retry 999 --retry-max-time 0 -C -
+    else
+        gdrive download "$2"
+    fi
     if [[ $? != 0 ]]; then
         error "failed to download $1!"
     fi
@@ -19,7 +23,9 @@ function download() {
 }
 
 function download_app() {
-    softpath=`whichapp "$1" > /dev/null 2>&1`
+    appname=$1
+    link=$2
+    softpath=`whichapp "$appname" > /dev/null 2>&1`
     if [ $? == 1 ]; then
       question "$appname is not installed. Do you want to download? [Y|n]" response
       if [[ -z "$response" ]]; then response='Y'; fi
@@ -27,11 +33,11 @@ function download_app() {
       question "$appname is already installed. Do you want to download again? [y|N]" response
       if [[ -z "$response" ]]; then response='N'; fi
     fi
-    
+
     if [[ $response =~ ^(yes|y|Y) ]]; then
-      running "Downloading $1 to ~/Downloads"; filler
+      running "Downloading $appname to ~/Downloads"; filler
       pushd ~/Downloads > /dev/null 2>&1
-      download $2
+      download "$appname" "$link"
       popd > /dev/null 2>&1
     fi
 }

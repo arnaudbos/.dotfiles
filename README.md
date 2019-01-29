@@ -85,7 +85,6 @@ cd ~/.dotfiles;
 ./install.sh
 ```
 * When it finishes, open Iterm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`
-* run `vim` and then do `:PluginInstall` (you'll see errors loading plugins when vim opens until you do)
 
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
 
@@ -97,7 +96,6 @@ If you have existing dotfiles for configuring git, zsh, vim, etc, these will be 
 
 ## Spacemacs as IDE
 I am moving away from using Vim and instead using emacs/Spacemacs as my IDE. I still use Vundle to manage vim plugins (instead of pathogen). Vundle is better in many ways and is compatible with pathogen plugins. Additionally, vundle will manage and install it's own plugins so we don't have to use git submodules for all of them.
-To install plugins with vundle, pop open vim and run `:PluginInstall`
 
 ## Crontab
 You can `cron ~/.crontab` if you want to add my nightly cron software updates.
@@ -292,7 +290,7 @@ The following is the software that I have set as default:
 
 ## Utilities
 
-See [casks.sh](casks.sh), [config.js](config.js) and [extras.sh](extracts.sh).
+See [brews.sh](brews.sh), [casks.sh](casks.sh) and [extras.sh](extracts.sh).
 
 # Contributions
 Contributions are always welcome in the form of pull requests with explanatory comments.
