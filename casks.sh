@@ -117,6 +117,12 @@ botdone
 bot "Setting up brews"
 ################################################
 
+bot "Installing >cyberduck<"
+require_cask cyberduck
+
+bot "Installing >dash<"
+require_cask dash
+
 bot "Installing >emacs<"
 require_cask emacs
 
