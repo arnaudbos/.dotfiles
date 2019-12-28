@@ -40,3 +40,7 @@ unsetopt correct
 chuck_cow | lolcat
 
 eval $(thefuck --alias)
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/arnaud/.sdkman"
+[[ -s "/Users/arnaud/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/arnaud/.sdkman/bin/sdkman-init.sh"

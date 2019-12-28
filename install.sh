@@ -117,7 +117,7 @@ fi
 
 if [[ $OSTYPE == darwin* ]]; then
   MD5_NEWWP=$(md5 img/laputa_huge.jpg | awk '{print $4}')
-  MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultDesktop.jpg | awk '{print $4}')
+  MD5_OLDWP=$(md5 /System/Library/CoreServices/DefaultBackground.jpg | awk '{print $4}')
 else
   MD5_NEWWP=$(md5sum ./img/laputa_huge.jpg | awk '{print $4}')
   MD5_OLDWP=$(md5sum $(gsettings get org.gnome.desktop.background picture-uri | sed 's/^.\{8\}\(.*\).\{1\}$/\1/'))
@@ -130,13 +130,13 @@ if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
   else
     running "Set a custom wallpaper image"
     if [[ $OSTYPE == darwin* ]]; then
-      # `DefaultDesktop.jpg` is already a symlink, and
-      # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
+      # `DefaultBackground.jpg` is already a symlink, and
+      # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Mojave Day.jpg`.
       rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-      sudo rm -f /System/Library/CoreServices/DefaultDesktop.jpg > /dev/null 2>&1
-      sudo rm -f /Library/Desktop\ Pictures/El\ Capitan.jpg
-      sudo cp ./img/laputa_huge.jpg /System/Library/CoreServices/DefaultDesktop.jpg;
-      sudo cp ./img/laputa_huge.jpg /Library/Desktop\ Pictures/El\ Capitan.jpg;ok
+      sudo rm -f /System/Library/CoreServices/DefaultBackground.jpg > /dev/null 2>&1
+      sudo rm -f /Library/Desktop\ Pictures/Mojave\ Day.jpg
+      sudo cp ./img/laputa_huge.jpg /System/Library/CoreServices/DefaultBackground.jpg;
+      sudo cp ./img/laputa_huge.jpg /Library/Desktop\ Pictures/Mojave\ Day.jpg;ok
     else
       gsettings set org.gnome.desktop.background picture-uri file://$(pwd)/img/laputa_huge.jpg;ok
     fi

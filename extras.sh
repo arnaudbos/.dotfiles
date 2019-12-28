@@ -14,15 +14,9 @@ if [[ $OSTYPE == darwin* ]]; then
   botdone
 
   ###############################################################################
-  bot "Downloading Final Cut Pro X"
+  bot "Downloading Final Cut Pro X 10.4.8"
   ###############################################################################
-  download_app 'Final Cut Pro X' 1RNUfXL6342IQ8QGguXcQR3yaSCZq790d
-  botdone
-
-  ###############################################################################
-  bot "Downloading Compressor"
-  ###############################################################################
-  download_app 'Compressor' 1jgQ62F8M9zs0immW4RHQs4eROOwcG1jp
+  download_app 'Final Cut Pro X 10.4.8' 1MbKfLa8NilJ970ILTrrQhVtIwHcNUWHP
   botdone
 
   ###############################################################################
