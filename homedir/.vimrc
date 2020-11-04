@@ -23,10 +23,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " language tools
 "Plugin 'sheerun/vim-polyglot'
 
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -191,3 +187,5 @@ noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$']
+
+let g:markdown_fenced_languages = ['clj=clojure']

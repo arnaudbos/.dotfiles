@@ -38,20 +38,6 @@ fi
 botdone
 
 ###############################################################################
-bot "Setting up >odrive<"
-###############################################################################
-# checks if odrive was already installed
-firstinstall=`brew cask list | grep "odrive" &> /dev/null ; echo $?`
-
-require_cask odrive
-
-# if first installation, opens
-if [ $firstinstall == 1 ]; then
-  open "/Applications/odrive.app"
-fi
-botdone
-
-###############################################################################
 bot "Setting up >JetBrains Toolbox<"
 ###############################################################################
 # checks if jetbrains-toolbox was already installed
@@ -117,26 +103,8 @@ botdone
 bot "Setting up brews"
 ################################################
 
-bot "Installing >cyberduck<"
-require_cask cyberduck
-
-bot "Installing >dash<"
-require_cask dash
-
-bot "Installing >emacs<"
-require_cask emacs
-
-bot "Installing >evernote<"
-require_cask evernote
-
-bot "Installing >geogebra<"
-require_cask geogebra
-
 bot "Installing >java<"
 require_cask java
-
-bot "Installing >skitch<"
-require_cask skitch
 
 bot "Installing >skype<"
 require_cask skype
@@ -144,13 +112,7 @@ require_cask skype
 bot "Installing >the-unarchiver<"
 require_cask the-unarchiver
 
-bot "Installing >transmission<"
-require_cask transmission
-
 bot "Installing >vlc<"
 require_cask vlc
-
-bot "Installing >xquartz<"
-require_cask xquartz
 
 botdone

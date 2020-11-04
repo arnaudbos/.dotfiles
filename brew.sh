@@ -40,9 +40,6 @@ bot "Setting up brews"
 bot "Installing >ack<"
 require_brew ack
 
-bot "Installing >annie<"
-require_brew annie
-
 bot "Installing >bat<"
 require_brew bat
 
@@ -131,7 +128,7 @@ bot "Installing >python<"
 require_brew python
 
 bot "Installing >clojure<"
-require_brew clojure
+require_brew clojure/tools/clojure
 
 bot "Installing >leiningen<"
 require_brew leiningen

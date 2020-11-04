@@ -29,7 +29,10 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent history jsontools lein colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle docker lein node npm pip virtualenv brew)
+plugins=(git ssh-agent history history-substring-search jsontools lein colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle docker lein node npm pip virtualenv brew)
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 source $ZSH/oh-my-zsh.sh
 
@@ -41,6 +44,10 @@ chuck_cow | lolcat
 
 eval $(thefuck --alias)
 
+source ~/.profile
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/arnaud/.sdkman"
 [[ -s "/Users/arnaud/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/arnaud/.sdkman/bin/sdkman-init.sh"
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+

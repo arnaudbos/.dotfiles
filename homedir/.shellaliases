@@ -17,6 +17,7 @@ alias to.lab='cd ${MYLAB}'
 #################################
 # Simple Program Name Shortening
 alias g=git
+alias make=gmake
 
 
 #############################

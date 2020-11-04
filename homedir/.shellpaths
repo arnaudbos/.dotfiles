@@ -12,3 +12,4 @@ export PATH=/usr/local/bin:$PATH
 
 # The next line enables shell command completion for gcloud.
 #source "/Users/$(whoami)/Downloads/google-cloud-sdk/completion.zsh.inc"
+

@@ -204,11 +204,9 @@ if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
 fi
 
 ################################################
-# spacemacs
+# Haskell
 ################################################
-if [[ ! -d "$HOME/.emacs.d" ]] ; then
-  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-fi
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 ################################################
 # dotfiles

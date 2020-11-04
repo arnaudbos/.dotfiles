@@ -32,20 +32,6 @@ if [[ $OSTYPE == darwin* ]]; then
   botdone
 
   ###############################################################################
-  bot "Downloading Cursive License"
-  ###############################################################################
-  running "Downloading Cursive Licence to ~/Downloads"; filler
-  pushd ~/Downloads > /dev/null 2>&1
-  download 'Cursive License' 1HKXWQImbTUob0TiH1x3oEzqp-BA7Giya
-  popd > /dev/null 2>&1
-  botdone
-
-  ###############################################################################
-  bot "Downloading useless TouchBarNyanCat"
-  download_app 'TouchBarNyanCat' 1SL54cb1lCQHM1FsDTVRYMVH-UXgBIwFB
-  botdone
-
-  ###############################################################################
   bot "Downloading Zotero"
   download_app 'Zotero' 1SRs0PaB7FDh8z4gvFdrqE1xkodcfZZyB
   botdone
