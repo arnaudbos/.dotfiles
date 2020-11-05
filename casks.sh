@@ -103,9 +103,6 @@ botdone
 bot "Setting up brews"
 ################################################
 
-bot "Installing >java<"
-require_cask java
-
 bot "Installing >skype<"
 require_cask skype
 

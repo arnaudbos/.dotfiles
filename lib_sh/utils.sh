@@ -4,7 +4,8 @@
 
 function question() {
     echo -en "\n$COL_MAGENTA ¿$COL_RESET" $1 " "
-    read -rp "" ret
+    local ret
+    read ret
     eval "$2=\$ret"
 }
 
@@ -12,9 +13,11 @@ function download() {
     running "downloading $1";filler
     http="${2:0:4}"
     if [[ $http = "http" ]]; then
-        curl -#LO "$2" --retry 999 --retry-max-time 0 -C -
+        wget "$2" -O "$1"
     else
-        gdrive download "$2"
+        warn "URL doesn't start with \"http\", can't download, maybe find another utility?"
+        # gdrive has been deprecated, maybe find something else one day
+        #gdrive download "$2"
     fi
     if [[ $? != 0 ]]; then
         error "failed to download $1!"
@@ -25,8 +28,9 @@ function download() {
 function download_app() {
     appname=$1
     link=$2
-    softpath=`whichapp "$appname" > /dev/null 2>&1`
-    if [ $? == 1 ]; then
+    local response
+    softpath=`stat "/Applications/$appname.app" > /dev/null 2>&1`
+    if [ $? = 1 ]; then
       question "$appname is not installed. Do you want to download? [Y|n]" response
       if [[ -z "$response" ]]; then response='Y'; fi
     else
@@ -37,7 +41,7 @@ function download_app() {
     if [[ $response =~ ^(yes|y|Y) ]]; then
       running "Downloading $appname to ~/Downloads"; filler
       pushd ~/Downloads > /dev/null 2>&1
-      download "$appname" "$link"
+      download "$appname.dmg" "$link"
       popd > /dev/null 2>&1
     fi
 }

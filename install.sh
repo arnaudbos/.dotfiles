@@ -130,13 +130,7 @@ if [[ "$MD5_NEWWP" != "$MD5_OLDWP" ]]; then
   else
     running "Set a custom wallpaper image"
     if [[ $OSTYPE == darwin* ]]; then
-      # `DefaultBackground.jpg` is already a symlink, and
-      # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Mojave Day.jpg`.
-      rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-      sudo rm -f /System/Library/CoreServices/DefaultBackground.jpg > /dev/null 2>&1
-      sudo rm -f /Library/Desktop\ Pictures/Mojave\ Day.jpg
-      sudo cp ./img/laputa_huge.jpg /System/Library/CoreServices/DefaultBackground.jpg;
-      sudo cp ./img/laputa_huge.jpg /Library/Desktop\ Pictures/Mojave\ Day.jpg;ok
+      osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'$HOME'/.dotfiles/img/laputa_huge.jpg"'
     else
       gsettings set org.gnome.desktop.background picture-uri file://$(pwd)/img/laputa_huge.jpg;ok
     fi
@@ -206,7 +200,24 @@ fi
 ################################################
 # Haskell
 ################################################
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+softcheck=`stat $HOME/.ghcup/env`
+if [ $? == 1]; then
+  running "Downloading and installing Haskell's ghcup"; filler
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+  ok
+fi
+
+################################################
+# whichapp
+################################################
+softcheck=`which whichapp`
+if [ $? == 1]; then
+  running "Downloading and installing whichapp"; filler
+  wget https://raw.githubusercontent.com/whitone/whichapp/master/whichapp
+  chmod +x whichapp
+  mv whichapp /usr/local/bin
+  ok
+fi
 
 ################################################
 # dotfiles

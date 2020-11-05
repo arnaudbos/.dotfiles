@@ -6,7 +6,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -111,6 +111,7 @@ set shiftwidth=4 " unify
 set tabstop=4 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
 filetype plugin indent on " load filetype plugins and indent settings
+set backspace=inident,eol,start
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
