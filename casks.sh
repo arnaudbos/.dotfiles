@@ -21,7 +21,7 @@ if [ $TERM_PROGRAM == 'iTerm.app' ]; then
     warn "You are running this script from inside iTerm. Some settings might not work. Run form Terminal to apply correctly"
 fi
 
-cp ./configs/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+sed "s/user_name/$LOGNAME/" ./configs/com.googlecode.iterm2.plist > ~/Library/Preferences/com.googlecode.iterm2.plist
 
 ###############################################################################
 bot "Setting up >Mozilla Firefox<"

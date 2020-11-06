@@ -1163,7 +1163,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/arnaud</string>
+			<string>/Users/user_name</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1888,7 +1888,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/arnaud</string>
+			<string>/Users/user_name</string>
 		</dict>
 	</array>
 	<key>NoSyncConfirmBeta</key>
@@ -2031,7 +2031,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/arnaud/.dotfiles/configs/</string>
+	<string>/Users/user_name/.dotfiles/configs/</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>

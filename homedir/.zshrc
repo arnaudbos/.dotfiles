@@ -45,10 +45,5 @@ chuck_cow | lolcat
 
 eval $(thefuck --alias)
 
-source ~/.profile
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/arnaud/.sdkman"
-[[ -s "/Users/arnaud/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/arnaud/.sdkman/bin/sdkman-init.sh"
-[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+source ~/.zprofile
 
