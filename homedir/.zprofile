@@ -21,3 +21,10 @@ setopt    incappendhistory  #Immediately append to the history file, not just wh
 function precmd () {
   z --add "$(pwd -P)"
 }
+
+##############################################################################
+# sdkman
+##############################################################################
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

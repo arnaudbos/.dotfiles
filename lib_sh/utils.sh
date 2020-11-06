@@ -15,9 +15,10 @@ function download() {
     if [[ $http = "http" ]]; then
         wget "$2" -O "$1"
     else
-        warn "URL doesn't start with \"http\", can't download, maybe find another utility?"
-        # gdrive has been deprecated, maybe find something else one day
-        #gdrive download "$2"
+        # gdrive trick
+        filename="$(curl -sc /tmp/gcokie "https://drive.google.com/uc?export=download&id=$2" | grep -o '="uc-name.*</span>' | sed 's/.*">//;s/<.a> .*//')"
+        getcode="$(awk '/_warning_/ {print $NF}' /tmp/gcokie)"
+        curl -Lb /tmp/gcokie "https://drive.google.com/uc?export=download&confirm=${getcode}&id=$2" -o "$1"
     fi
     if [[ $? != 0 ]]; then
         error "failed to download $1!"
@@ -43,6 +44,36 @@ function download_app() {
       pushd ~/Downloads > /dev/null 2>&1
       download "$appname.dmg" "$link"
       popd > /dev/null 2>&1
+    fi
+}
+
+function download_mac_app() {
+    appname=$1
+    local response
+    installed=`mas list | grep -i "$1" | wc -l | sed -e 's/^[ \t]*//'`
+    if [ $installed -ge 1 ]; then
+      msg "$appname is already installed. Nothing to do."
+      return
+    else
+      question "$appname is not installed. Do you want to install? [Y|n]" response
+      if [[ -z "$response" ]]; then response='Y'; fi
+    fi
+
+    if [[ $response =~ ^(yes|y|Y) ]]; then
+      running "Searching apps with name $appname into Mac App Store"; filler
+      mas search $appname
+    else
+      return
+    fi
+
+    unset response
+
+    question "Please entre the app ID for $appname that you wish to install" id
+    if [[ -z "$id" ]]; then
+      return
+    else
+      mas purchase $id
+      mas install $id
     fi
 }
 

@@ -34,6 +34,7 @@ plugins=(git ssh-agent history history-substring-search jsontools lein colored-m
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+export ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...

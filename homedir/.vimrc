@@ -111,7 +111,7 @@ set shiftwidth=4 " unify
 set tabstop=4 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
 filetype plugin indent on " load filetype plugins and indent settings
-set backspace=inident,eol,start
+set backspace=indent,eol,start
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout

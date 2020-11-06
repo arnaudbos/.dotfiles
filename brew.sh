@@ -64,6 +64,9 @@ require_brew findutils
 bot "Installing >fd<"
 require_brew fd
 
+bot "Installing >cowthink<"
+require_brew cowthink
+
 bot "Installing >fortune<"
 require_brew fortune
 
@@ -153,5 +156,11 @@ require_brew watch
 
 bot "Installing >wget<"
 require_brew wget
+
+bot "Installing >Visual Studio Code<"
+require_brew visual-studio-code
+
+bot "Installing >mas<"
+require_brew mas
 
 botdone

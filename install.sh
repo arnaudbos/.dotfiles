@@ -18,30 +18,60 @@ bot "Hi! I'm going to install tooling and tweak your system settings. Here I go.
 # user wants to use gitshots
 mkdir -p ~/.gitshots
 
-# Ask for the administrator password upfront
-if sudo grep -q "# %wheel\tALL=(ALL) NOPASSWD: ALL" "/etc/sudoers"; then
-
-  # Ask for the administrator password upfront
-  bot "I need you to enter your sudo password so I can install some things:"
+# Do we need to ask for sudo password or is it already passwordless?
+grep -q 'NOPASSWD:     ALL' /etc/sudoers.d/$LOGNAME > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "no suder file"
   sudo -v
 
   # Keep-alive: update existing sudo time stamp until the script has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-  question "Do you want me to setup this machine to allow you to run sudo without a password?\n
-        More infomation here: http://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n
-              [y|N]" response
+  bot "Do you want me to setup this machine to allow you to run sudo without a password?\nPlease read here to see what I am doing:\nhttp://wiki.summercode.com/sudo_without_a_password_in_mac_os_x \n"
+
+  read -r -p "Make sudo passwordless? [y|N] " response
 
   if [[ $response =~ (yes|y|Y) ]];then
-      sed --version 2>&1 > /dev/null
-      sudo sed -i '' 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
-      if [[ $? == 0 ]];then
-          sudo sed -i 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers
+      if ! grep -q "#includedir /private/etc/sudoers.d" /etc/sudoers; then
+        echo '#includedir /private/etc/sudoers.d' | sudo tee -a /etc/sudoers > /dev/null
       fi
-      sudo dscl . append /Groups/wheel GroupMembership $(whoami)
-      bot "You can now run sudo commands without password!"
+      echo -e "Defaults:$LOGNAME    !requiretty\n$LOGNAME ALL=(ALL) NOPASSWD:     ALL" | sudo tee /etc/sudoers.d/$LOGNAME
+      echo "You can now run sudo commands without password!"
   fi
 fi
+
+# ###########################################################
+# /etc/hosts -- spyware/ad blocking
+# ###########################################################
+read -r -p "Overwrite /etc/hosts with the ad-blocking hosts file from someonewhocares.org? (from ./configs/hosts file) [y|N] " response
+if [[ $response =~ (yes|y|Y) ]];then
+    action "cp /etc/hosts /etc/hosts.backup"
+    sudo cp /etc/hosts /etc/hosts.backup
+    ok
+    action "cp ./configs/hosts /etc/hosts"
+    sudo cp ./configs/hosts /etc/hosts
+    ok
+    bot "Your /etc/hosts file has been updated. Last version is saved in /etc/hosts.backup"
+else
+    ok "skipped";
+fi
+
+# ###########################################################
+# Git Config
+# ###########################################################
+local response
+question "Generate SSH key \"id_rsa(.pub)\"? [Y|n]" response
+if [[ $response =~ ^(yes|y|Y) ]]; then
+  local ssh_email
+  question "Please enter the email address for the SSH key" ssh_email
+  if [[ -z "$ssh_email" ]]; then
+    return
+  else
+    ssh-keygen -t rsa -b 4096 -C "$ssh_email" -f "$HOME/.ssh/id_rsa"
+  fi
+  unset ssh_email
+fi
+unset response
 
 grep 'user = GITHUBUSER' ./homedir/.gitconfig > /dev/null 2>&1
 if [[ $? = 0 ]]; then
@@ -142,6 +172,7 @@ fi
 ################################################
 if [[ $OSTYPE == darwin* ]]; then
   source ./brew.sh;
+  source ./mas.sh;
   source ./casks.sh;
 else
   source ./apt.sh;
@@ -160,6 +191,17 @@ else
   require_apt fontconfig
 fi
 # need fontconfig to install/build fonts
+
+################################################
+bot "Setting up >sdkman<"
+################################################
+softcheck=`stat $HOME/.sdkman > /dev/null 2>&1`
+if [ $? = 1 ]; then
+  curl -sSf "https://get.sdkman.io" | sudo bash
+  sudo chown -R $LOGNAME $HOME/.sdkman
+  chmod +x $HOME/.sdkman/bin/sdkman-init.sh
+  ok
+fi
 
 ################################################
 bot "Setting up >ZSH<"
@@ -204,18 +246,6 @@ softcheck=`stat $HOME/.ghcup/env`
 if [ $? == 1]; then
   running "Downloading and installing Haskell's ghcup"; filler
   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-  ok
-fi
-
-################################################
-# whichapp
-################################################
-softcheck=`which whichapp`
-if [ $? == 1]; then
-  running "Downloading and installing whichapp"; filler
-  wget https://raw.githubusercontent.com/whitone/whichapp/master/whichapp
-  chmod +x whichapp
-  mv whichapp /usr/local/bin
   ok
 fi
 
@@ -280,8 +310,8 @@ if [[ $OSTYPE == darwin* ]]; then
     ###############################################################################
     bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
     ###############################################################################
-    item 1 "Installing from App Store:"
-    item 2 "...?"
+    item 1 "Installing Java:"
+    item 2 "sdk list java"
     item 1 "Installing from JetBrains Toolbox:"
     item 2 "IntelliJ IDEA with plugins"
     item 1 "Installing Google Cloud tools."
@@ -291,7 +321,6 @@ if [[ $OSTYPE == darwin* ]]; then
     item 2 "Add 'odrive' to sidebar"
     item 2 "Add folders to sidebar: 'Lab'"
     filler
-    item 1 "Set odrive configuration."
     item 1 "Sync Firefox."
     item 1 "Set Final Cut Pro X / Compressor / Grammarly configuration."
     item 1 "Set Cursive and SizeUp licenses."
