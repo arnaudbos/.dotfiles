@@ -163,4 +163,7 @@ require_brew visual-studio-code
 bot "Installing >mas<"
 require_brew mas
 
+bot "Installing >npm<"
+require_brew npm
+
 botdone

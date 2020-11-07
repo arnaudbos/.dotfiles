@@ -1,5 +1,29 @@
 #!/usr/bin/env bash
 
+################################################
+# Haskell
+################################################
+softcheck=`stat $HOME/.ghcup/env`
+if [ $? == 1]; then
+  running "Downloading and installing Haskell's ghcup"; filler
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+  ok
+fi
+
+################################################
+# TLA+
+################################################
+softcheck=`which tlc > /dev/null 2>&1`
+if [ $? == 1]; then
+  running "Downloading and installing tla-bin"; filler
+  git clone https://github.com/pmer/tla-bin.git ~/.tla-bin
+  pushd ~/.tla-bin > /dev/null 2>&1
+  ./download_or_update_tla.sh
+  sudo ./install.sh
+  popd > /dev/null 2>&1
+  ok
+fi
+
 if [[ $OSTYPE == darwin* ]]; then
   ###############################################################################
   bot "Downloading OmniPlan"

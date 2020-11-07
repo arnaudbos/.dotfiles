@@ -59,10 +59,8 @@ fi
 # ###########################################################
 # Git Config
 # ###########################################################
-local response
 question "Generate SSH key \"id_rsa(.pub)\"? [Y|n]" response
 if [[ $response =~ ^(yes|y|Y) ]]; then
-  local ssh_email
   question "Please enter the email address for the SSH key" ssh_email
   if [[ -z "$ssh_email" ]]; then
     return
@@ -240,16 +238,6 @@ if [[ ! -d "./oh-my-zsh/custom/themes/powerlevel9k" ]]; then
 fi
 
 ################################################
-# Haskell
-################################################
-softcheck=`stat $HOME/.ghcup/env`
-if [ $? == 1]; then
-  running "Downloading and installing Haskell's ghcup"; filler
-  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-  ok
-fi
-
-################################################
 # dotfiles
 ################################################
 source ./dotfiles.sh
@@ -310,10 +298,18 @@ if [[ $OSTYPE == darwin* ]]; then
     ###############################################################################
     bot "Unfortunately I can't setup everything :( Heres a list of things you need to manually do"
     ###############################################################################
-    item 1 "Installing Java:"
+    item 1 "Install Java:"
     item 2 "sdk list java"
-    item 1 "Installing from JetBrains Toolbox:"
-    item 2 "IntelliJ IDEA with plugins"
+    item 1 "Install VS Code"
+    item 2 "Plugin better-comments should be installed manually if TLA+ support not yet merged:"
+    item 3 "wget https://github.com/alygin/better-comments/archive/tla-plus-support.zip"
+    item 3 "cd better-comments-tla-plus-support"
+    item 3 "npm install -g vsce"
+    item 3 "npm install -g typescript"
+    item 3 "npm install"
+    item 3 "vsce package"
+    item 3 "code --install-extension better-comments-2.1.0.vsix"
+    item 1 "Install IntelliJ IDEA with plugins"
     item 1 "Installing Google Cloud tools."
     filler
     item 1 "Set Finder settings"

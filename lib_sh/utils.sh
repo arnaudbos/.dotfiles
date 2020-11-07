@@ -61,7 +61,7 @@ function download_mac_app() {
 
     if [[ $response =~ ^(yes|y|Y) ]]; then
       running "Searching apps with name $appname into Mac App Store"; filler
-      mas search $appname
+      mas search "$appname"
     else
       return
     fi
