@@ -31,6 +31,9 @@ download_mac_app "Keynote"
 bot "Installing >Numbers<"
 download_mac_app "Numbers"
 
+bot "Installing >Slack<"
+download_mac_app "Slack"
+
 filler
 filler
 
