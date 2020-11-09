@@ -112,4 +112,7 @@ require_cask the-unarchiver
 bot "Installing >vlc<"
 require_cask vlc
 
+bot "Installing >mactex (latex)<"
+require_cask mactex
+
 botdone
