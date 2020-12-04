@@ -115,4 +115,7 @@ require_cask vlc
 bot "Installing >mactex (latex)<"
 require_cask mactex
 
+bot "Installing >TLA+ (toolbox)<"
+require_cask tla-plus-toolbox
+
 botdone
