@@ -133,6 +133,9 @@ require_brew python
 bot "Installing >clojure<"
 require_brew clojure/tools/clojure
 
+bot "Installing >babashka<"
+require_brew borkdude/brew/babashka
+
 bot "Installing >leiningen<"
 require_brew leiningen
 
