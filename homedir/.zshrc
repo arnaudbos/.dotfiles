@@ -29,7 +29,7 @@ export DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent history history-substring-search jsontools lein colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle docker lein node npm pip virtualenv brew)
+plugins=(git ssh-agent history history-substring-search jsontools lein colored-man-pages colorize copyfile aws chucknorris encode64 tmux vundle docker lein node npm pip virtualenv brew zsh-syntax-highlighting zsh-autosuggestions)
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
@@ -47,3 +47,18 @@ eval $(thefuck --alias)
 
 source ~/.zprofile
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/arnaud/Lab/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/arnaud/Lab/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/arnaud/Lab/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/arnaud/Lab/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next line enables shell command completion for kubectl.
+if [ -x "$(command -v kubectl)" ]; then source <(kubectl completion zsh); fi
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
